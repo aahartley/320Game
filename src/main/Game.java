@@ -38,6 +38,7 @@ public class Game {
     public List<Bullet>  bullets;
     private EnemyGenerator gen=null;
 	private boolean isRunning;
+	public static boolean paused =false;
 	
 	public Game() {
 		this.colliders = null;
@@ -113,6 +114,11 @@ public class Game {
 	      this.shooter.addMouseListener( new MouseListener(){
 	          public void mousePressed(MouseEvent e){
 	        	 // System.out.println("click");
+	        	  if(paused) {
+	        		  paused=false;
+	        		  gen.reset();
+	        		  gen.setNumOfEnemies(0);
+	        	  }
 	              crosshair.moveCrosshair(e.getX(),e.getY());
 	              Bullet b = new Bullet(player.getX(),player.getY(),e.getX(),e.getY());
 	              colliders.add(b);
@@ -174,7 +180,6 @@ public class Game {
 	            long lastUpdateTime = System.nanoTime();
 	            // store the time we started this will be used for updating map and charcter animations
 	            long currTime = System.currentTimeMillis();
-                boolean gameOver=false;
 
 	            while (isRunning) {
 	                long now = System.nanoTime();
@@ -182,11 +187,13 @@ public class Game {
 	                currTime += elapsedTime;
 	                int updateCount = 0;
 	                // do as many game updates as we need to, potentially playing catchup.
+	                if(!paused) {
 	                while (now - lastUpdateTime >= TIME_BETWEEN_UPDATES && updateCount < MAX_UPDATES_BETWEEN_RENDER) {
 	                    this.shooter.update(elapsedTime);//Update the entity movements and collision checks etc (all has to do with updating the games status i.e  call move() on Enitites)
 	                  //  System.out.println(elapsedTime);
 	                    lastUpdateTime += TIME_BETWEEN_UPDATES;
 	                    updateCount++;
+	                }
 	                }
 
 	                // if for some reason an update takes forever, we don't want to do an insane number of catchups.

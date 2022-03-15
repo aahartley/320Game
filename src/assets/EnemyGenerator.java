@@ -2,6 +2,7 @@ package assets;
 
 import java.util.List;
 
+import main.Game;
 import main.Main;
 
 public class EnemyGenerator {
@@ -44,6 +45,9 @@ public class EnemyGenerator {
 			colliders.add(e);
 		}
 	}
+	public void setNumOfEnemies(int num) {
+		this.numOfE = num;
+	}
 	public int getNumOfEnemies() {
 		int count=0;
 		for(Colliders c: colliders) {
@@ -52,5 +56,11 @@ public class EnemyGenerator {
 		}
 		return count;
 		
+	}
+	public void reset() {
+		for(Colliders c: colliders) {
+			if(!c.isPlayer())
+				colliders.remove(c);
+		}
 	}
 }

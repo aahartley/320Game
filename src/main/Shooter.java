@@ -59,6 +59,10 @@ public class Shooter extends JPanel  {
             e.draw(g2d);
         }
         crosshair.draw(g2d);
+        if(Game.paused) {
+        	g2d.drawString("Tap to restart", Main.WIDTH/2, Main.HEIGHT/2);
+        	explosions.clear();
+        }
         g2d.dispose();
         g.dispose();
 	}
@@ -73,7 +77,9 @@ public class Shooter extends JPanel  {
 				((Bullet)e).move(elaspedTime);
 		}
 		player.move(elaspedTime);
-		
+		for(Explosion e: explosions) {
+			e.update(elaspedTime);
+		}
 		checkCollision(elaspedTime);
 		
 	}
