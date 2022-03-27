@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.List;
 
+import main.Game;
 import main.Main;
 import main.Shooter;
 
@@ -74,6 +75,7 @@ public class Bullet extends Colliders {
     	  	if(distance <= radiusSum) {
     	  		colliders.remove(this);
     	  		colliders.remove(c);
+    	  		Game.points++;
     	  		Explosion e = new Explosion(xPos,yPos);
     	  		Shooter.explosions.add(e);
     	  		System.out.println("bullet gone");

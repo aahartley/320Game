@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -59,8 +60,11 @@ public class Shooter extends JPanel  {
             e.draw(g2d);
         }
         crosshair.draw(g2d);
+    	g2d.setFont(new Font("serif", Font.BOLD, 20));
+        g2d.drawString("Score: "+Game.points+"",Main.WIDTH/2-250,50);
         if(Game.paused) {
-        	g2d.drawString("Tap to restart", Main.WIDTH/2, Main.HEIGHT/2);
+        	g2d.drawString("Tap to restart", Main.WIDTH/2-50, Main.HEIGHT/2-100);
+        	Game.points=0;
         	explosions.clear();
         }
         g2d.dispose();

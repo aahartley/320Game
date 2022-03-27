@@ -31,14 +31,13 @@ public class Game {
 	private Thread gameLoop;
 	private Shooter shooter;
 	private Crosshair crosshair;
-	private Colliders enemy;
-	private Colliders enemy2;
 	private Colliders player;
     public List<Colliders> colliders;
     public List<Bullet>  bullets;
     private EnemyGenerator gen=null;
 	private boolean isRunning;
 	public static boolean paused =false;
+	public static int points =0;
 	
 	public Game() {
 		this.colliders = null;
